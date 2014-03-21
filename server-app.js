@@ -1,4 +1,4 @@
-express = require('/usr/lib64/node_modules/lineman/node_modules/express/lib/express.js')
+express = require('express')
 app = module.exports = express()
 
 

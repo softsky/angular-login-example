@@ -16,7 +16,7 @@
     "url": "https://github.com/mrgamer/angular-login-example.git"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
+    "grunt": "~0.4.4",
     "grunt-html2js": "~0.1.7",
     "grunt-contrib-less": "~0.7.0",
     "grunt-contrib-watch": "~0.5.3",
@@ -28,6 +28,7 @@
     "grunt-concat-sourcemap": "~0.3.1",
     "grunt-express": "^1.2.1",
     "grunt-contrib-requirejs": "^0.4.3",
+    "express": "3.x",
     "node-localstorage": "^0.3.4",
     "node.extend": "^1.0.10"
   }

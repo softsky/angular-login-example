@@ -34,16 +34,6 @@ module.exports = function (grunt) {
         }
       }
     },
-      // connect: {
-      //     server: {
-      //         options: {
-      //             port: 8080,
-      //             base: 'build/',
-      //             hostname: '*',
-      //             debug: true
-      //         }
-      //     }
-      // },
     watch: {
       options: {
         atBegin: true
