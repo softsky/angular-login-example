@@ -8,6 +8,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-concat-sourcemap');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-express');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -32,16 +34,16 @@ module.exports = function (grunt) {
         }
       }
     },
-    connect: {
-      serve: {
-        options: {
-          port: 8080,
-          base: 'build/',
-          hostname: '*',
-          debug: true
-        }
-      }
-    },
+      // connect: {
+      //     server: {
+      //         options: {
+      //             port: 8080,
+      //             base: 'build/',
+      //             hostname: '*',
+      //             debug: true
+      //         }
+      //     }
+      // },
     watch: {
       options: {
         atBegin: true
@@ -135,6 +137,11 @@ module.exports = function (grunt) {
     grunt.task.run('git-describe');
   });
 
+    grunt.registerTask('server', 'Start a custom web server', function() {
+        grunt.log.writeln('Started web server on port 8080');
+        require('./server-app.js').listen(8080);
+    });
+
   // Build process:
   // - clean build/
   // - creates build/templates-app.js from *.tpl.html files
@@ -144,5 +151,7 @@ module.exports = function (grunt) {
   // - concatenates all the libraries in build/libs.js
   // - copies index.html over build/
   grunt.registerTask('build', ['clean', 'html2js', 'less', 'saveRevision', 'concat_sourcemap:app', 'concat_sourcemap:libs', 'copy']);
-  grunt.registerTask('default', ['clean', 'concat_sourcemap:libs', 'connect', 'watch']);
+  grunt.registerTask('default', ['clean', 'concat_sourcemap:libs', 'server', 'watch']);
+  grunt.loadNpmTasks('grunt-contrib-connect');
+
 };
