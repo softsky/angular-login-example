@@ -25,10 +25,9 @@ angular.module('loginInjectorService', [])
 
         var self = this;
         this.inject = function(services){
-            var injector = angular.injector(['my'])
             angular.forEach(services, function(service){
                 var pair = {}
-                pair[service] = injector.get(service)
+                pair[service] = null;
                 self.services.push(pair)
             })
             console.log("Serivces injected:", self.services)
@@ -39,11 +38,28 @@ angular.module('loginInjectorService', [])
                 tokenSaved: function(){
                     $loginStateProvider.authenticated(true)
                     console.log('loggedIn')
+
+                    var injector = angular.injector(['my'])
+                    angular.forEach(self.services, function(service){
+                        var serviceName = Object.keys(service)[0]
+                        self.services[serviceName] = injector.get(serviceName)
+                    })
+
+                    console.log("Serivces injected:", self.services)
+
                 },
 
                 tokenRemoved: function(){
                     $loginStateProvider.authenticated(true)
                     console.log('loggedOut')
+                    angular.forEach(self.services, function(service){
+                        var serviceName = Object.keys(service)[0]
+                        var val = self.services[serviceName];
+                        delete val;
+                        self.services[serviceName] = null;
+                    })
+
+                    console.log("Serivces injected:", self.services)
                 },
 
             }
