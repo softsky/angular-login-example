@@ -1,11 +1,15 @@
-angular.module('loginService', [])
+angular.module('loginService', [
+    'loginInjectorService'
+])
+.config(function(loginInjectorServiceProvider){
+    loginInjectorServiceProvider.inject(['my.service'])
+})
 .provider('loginService', function () {
   var userToken = localStorage.getItem('userToken'),
       errorState = 'app.error',
       logoutState = 'app.home';
 
-  this.$get = function ($rootScope, $http, $q, $state) {
-
+  this.$get = function ($rootScope, $http, $q, $state, loginInjectorService) {
     /**
      * Low-level, private functions.
      */
@@ -134,6 +138,8 @@ angular.module('loginService', [])
          *   $state.go('app.nagscreen');
          * }
          */
+        loginInjectorService.tokenSaved()
+
         // setup token
         setToken(user.token);
         // update user
@@ -157,6 +163,7 @@ angular.module('loginService', [])
         this.user = {};
         this.isLogged = false;
         $state.go(logoutState);
+        loginInjectorService.tokenRemoved()
       },
       resolvePendingState: function (httpPromise) {
         var checkUser = $q.defer(),

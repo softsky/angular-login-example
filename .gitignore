@@ -1,24 +1,28 @@
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
 
-pids
-logs
-results
 
-npm-debug.log
-node_modules/
+
+
 
 # bower dir
-libs/
-
 # build dir
-build/
-
 # release dir
+*.csv
+*.dat
+*.gz
+*.log
+*.out
+*.pid
+*.seed
+/.emacs.desktop
+/.emacs.desktop.lock
+/master
+/scratch
+build/
 dest/
+lib-cov
+libs/
+logs
+node_modules/
+npm-debug.log
+pids
+results

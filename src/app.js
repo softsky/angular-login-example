@@ -1,5 +1,6 @@
 angular.module('angular-login', [
   // login service
+  'loginInjectorService',
   'loginService',
   'angular-login.directives',
   // different app sections
@@ -25,7 +26,7 @@ angular.module('angular-login', [
     $rootScope.doingResolve = true;
   });
   $rootScope.$on('$stateChangeSuccess', resolveDone);
-  $rootScope.$on('$stateChangeError', resolveDone);
+  $rootScope.$on('$stateChangerror', resolveDone);
   $rootScope.$on('$statePermissionError', resolveDone);
 })
 .controller('BodyController', function ($scope, $state, $stateParams, loginService, $http, $timeout) {
