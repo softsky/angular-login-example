@@ -26,7 +26,7 @@ angular.module('angular-login', [
     $rootScope.doingResolve = true;
   });
   $rootScope.$on('$stateChangeSuccess', resolveDone);
-  $rootScope.$on('$stateChangerror', resolveDone);
+  $rootScope.$on('$stateChangError', resolveDone);
   $rootScope.$on('$statePermissionError', resolveDone);
 })
 .controller('BodyController', function ($scope, $state, $stateParams, loginService, $http, $timeout) {
